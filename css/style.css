@@ -1,227 +1,244 @@
-
+/* style.css - ajustado para responsividade e logo */
 body {
-display: flex;
-flex-direction: column;
-min-height: 100vh;
-background: #0c0c0c;
-font-family: Arial, sans-serif;
-margin: 0;
-padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #0c0c0c;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 main {
-flex: 1;
-padding-bottom: 30px;
+  flex: 1;
+  padding-bottom: 30px;
 }
 
 .logo-container {
-position: absolute;
-top: -60px;
-right: -5px;
+  position: absolute;
+  top: -60px;
+  right: -5px;
+  pointer-events: none;
 }
 
 .logo-container img {
-height: 220px;
-object-fit: contain;
+  height: 220px;
+  object-fit: contain;
 }
 
 .form-box {
-margin: 30px auto;
-background: #ffffff;
-padding: 20px;
-border-radius: 12px;
-width: 50%;
-box-shadow: 0 0 5px rgba(245, 245, 245, 0.9);
+  margin: 30px auto;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 50%;
+  max-width: 900px;
+  min-width: 320px;
+  box-shadow: 0 0 5px rgba(245, 245, 245, 0.9);
 }
 
 .form-box h4 {
-text-align: center;
-margin-bottom: 20px;
-font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .stepper-container {
-text-align: center;
-margin-bottom: 10px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .steps {
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 10px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .line {
-width: 80px;
-height: 2px;
-background: #00ab6a;
+  width: 80px;
+  height: 2px;
+  background: #00ab6a;
 }
 
 .step {
-display: flex;
-flex-direction: column;
-align-items: center;
-color: #565656;
-font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #565656;
+  font-size: 14px;
 }
 
 .circle {
-width: 28px;
-height: 28px;
-border-radius: 50%;
-background: #c5c5c5;
-color: white;
-display: flex;
-justify-content: center;
-align-items: center;
-font-weight: bold;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #c5c5c5;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
 }
 
 .step.active .circle {
-background: #00ab6a;
+  background: #00ab6a;
 }
 
 .step.active {
-color: #00ab6a;
+  color: #00ab6a;
 }
 
 .form-step {
-padding-bottom: 60px;
-overflow: visible;
+  padding-bottom: 60px;
+  overflow: visible;
 }
 
 .form-control {
-min-height: 32px;
-height: auto;
-font-size: 0.85rem;
-border-radius: 8px;
-padding: 10px;
+  min-height: 32px;
+  height: auto;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  padding: 10px;
 }
 
 .mb-3 {
-margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 button {
-font-size: 0.85rem;
-border-radius: 6px;
-padding: 5px 6px;
-font-weight: 200;
-cursor: pointer;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  padding: 5px 6px;
+  font-weight: 200;
+  cursor: pointer;
 }
 
 .custom-btn {
-background-color: #474747;
-color: white;
-padding: 10px 20px;
-border: none;
-transition: background-color 0.2s;
+  background-color: #474747;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  transition: background-color 0.2s;
 }
 
 .custom-btn:hover {
-background-color: #00ab6a;
+  background-color: #00ab6a;
 }
 
 .page-title {
-margin-left: 10px;
-margin-top: 30px;
-font-size: 30px;
-color: #b0b0b0;
+  margin-left: 10px;
+  margin-top: 30px;
+  font-size: 30px;
+  color: #b0b0b0;
 }
 
 .segundo-titulo {
-margin-top: -10px;
-color: #b0b0b0;
+  margin-top: -10px;
+  color: #b0b0b0;
 }
 
 .privacy-checkbox {
-margin-top: 30px;
+  margin-top: 30px;
 }
 
 .modal-dialog {
-max-width: 600px;
+  max-width: 600px;
 }
 
 .modal-header,
 .modal-footer {
-background-color: #f1f1f1;
-border-color: #ddd;
+  background-color: #f1f1f1;
+  border-color: #ddd;
 }
 
 #btn-next-1 {
-background-color: #000000;
-color: white;
-border: none;
-padding: 10px 20px;
-font-size: 16px;
-border-radius: 5px;
-transition: background-color 0.3s, transform 0.3s;
+  background-color: #000000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 #btn-next-1:hover {
-background-color: #00ab6a;
-transform: scale(1.05);
+  background-color: #00ab6a;
+  transform: scale(1.05);
 }
 
 #btn-prev-2 {
-background-color: #3a3a3a;
-color: white;
-border: none;
-padding: 10px 20px;
-font-size: 16px;
-border-radius: 5px;
+  background-color: #3a3a3a;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
 #btn-next-2 {
-background-color: #030303;
-color: white;
-border: none;
-padding: 10px 20px;
-font-size: 16px;
-border-radius: 5px;
-transition: background-color 0.3s, transform 0.3s;
+  background-color: #030303;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 #btn-next-2:hover {
-background-color: #28a745;
-transform: scale(1.05);
+  background-color: #28a745;
+  transform: scale(1.05);
 }
 
 #btn-prev-3 {
-background-color: #3f3f3f;
-color: white;
-border: none;
-padding: 10px 20px;
-font-size: 16px;
-border-radius: 5px;
+  background-color: #3f3f3f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
 #btn-next-3 {
-background-color: #0a0b0b;
-color: white;
-border: none;
-padding: 10px 20px;
-font-size: 16px;
-border-radius: 5px;
-transition: background-color 0.3s, transform 0.3s;
+  background-color: #0a0b0b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 #btn-next-3:hover {
-background-color: #218838;
-transform: scale(1.05);
+  background-color: #218838;
+  transform: scale(1.05);
 }
 
 .form-check-input:checked {
-background-color: #28a745;
-border-color: #28a745;
+  background-color: #28a745;
+  border-color: #28a745;
 }
 
 .form-check-input:focus {
-outline: none;
-box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+  outline: none;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
 }
 
 .form-check-input {
-transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .form-box {
+    width: 90%;
+  }
+  .logo-container img {
+    height: 140px;
+  }
+  .logo-container {
+    top: -40px;
+    right: -10px;
+  }
 }

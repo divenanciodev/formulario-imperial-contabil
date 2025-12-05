@@ -1,5 +1,4 @@
-// formulario.js - versão ajustada para evitar preflight CORS
-// ATENÇÃO: substitua o valor de APPS_SCRIPT_URL pela URL do deploy do seu Web App do Google Apps Script.
+// formulario.js - versão ajustada (modal não é aberto manualmente, evita preflight)
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynepngEGqRzYJ484xcVh3Jgpz94YODh0q7RtoVwf8P5xuGzHxj2iVQVTu4yRPBmXKf/exec";
 const SECRET_TOKEN = "Impe@!&_Co@B&%$lid@de";
 
@@ -25,15 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("btn-next-2")?.addEventListener("click", e => { e.preventDefault(); showStep(3); });
   document.getElementById("btn-prev-3")?.addEventListener("click", e => { e.preventDefault(); showStep(2); });
 
-  // ---------- modal privacidade ----------
-  const privacyLink = document.querySelector('[data-bs-toggle="modal"]');
-  if (privacyLink) {
-    privacyLink.addEventListener("click", function (e) {
-      e.preventDefault();
-      const modalEl = document.getElementById("privacy-modal");
-      if (modalEl) new bootstrap.Modal(modalEl).show();
-    });
-  }
+  // ---------- NOTA: modal é acionado pelo data-bs-toggle no HTML ----------
+  // Não abrimos o modal via JS para evitar abertura dupla e backdrop preso.
 
   // ---------- máscaras e formatação ----------
   const capitalInput = document.getElementById('capitalSocial');
@@ -65,10 +57,10 @@ document.addEventListener("DOMContentLoaded", function () {
   emailInput?.addEventListener('input', function () {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (this.value === "" || regex.test(this.value)) {
-      emailError.style.display = "none";
+      if (emailError) emailError.style.display = "none";
       this.style.borderColor = "";
     } else {
-      emailError.style.display = "block";
+      if (emailError) emailError.style.display = "block";
       this.style.borderColor = "red";
     }
   });
@@ -79,10 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (value.length > 5) value = value.slice(0, 5) + '-' + value.slice(5, 8);
     this.value = value;
   });
-
-  document.getElementById('uf')?.addEventListener('input', function () {
-    this.value = this.value.toUpperCase();
-  });
+  document.getElementById('uf')?.addEventListener('input', function () { this.value = this.value.toUpperCase(); });
 
   // ---------- capitalize ----------
   function capitalizeWords(inputElement) {
@@ -90,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
       this.value = this.value.replace(/\b\w/g, l => l.toUpperCase());
     });
   }
-
   ['razaoSocial', 'razaoSocial2', 'razaoSocial3', 'nomeFantasia'].forEach(id => {
     const el = document.getElementById(id);
     if (el) capitalizeWords(el);
@@ -99,27 +87,27 @@ document.addEventListener("DOMContentLoaded", function () {
   // ---------- coletar dados ----------
   function coletarDados() {
     return {
-      razaoSocial: razaoSocial.value || "",
-      razaoSocial2: razaoSocial2.value || "",
-      razaoSocial3: razaoSocial3.value || "",
-      nomeFantasia: nomeFantasia.value || "",
-      telefone: telefone.value || "",
-      celular: celular.value || "",
-      email: email.value || "",
-      endereco: endereco.value || "",
-      numero: numero.value || "",
-      logradouro: logradouro.value || "",
-      complemento: complemento.value || "",
-      bairro: bairro.value || "",
-      cidade: cidade.value || "",
-      uf: uf.value || "",
-      cep: cep.value || "",
-      referencia: referencia.value || "",
-      tipoJuridico: tipoJuridico.value || "",
-      porteEmpresa: porteEmpresa.value || "",
-      objetivoSocial: objetivoSocial.value || "",
-      regimeTributario: regimeTributario.value || "",
-      capitalSocial: capitalSocial.value || "",
+      razaoSocial: document.getElementById("razaoSocial")?.value || "",
+      razaoSocial2: document.getElementById("razaoSocial2")?.value || "",
+      razaoSocial3: document.getElementById("razaoSocial3")?.value || "",
+      nomeFantasia: document.getElementById("nomeFantasia")?.value || "",
+      telefone: document.getElementById("telefone")?.value || "",
+      celular: document.getElementById("celular")?.value || "",
+      email: document.getElementById("email")?.value || "",
+      endereco: document.getElementById("endereco")?.value || "",
+      numero: document.getElementById("numero")?.value || "",
+      logradouro: document.getElementById("logradouro")?.value || "",
+      complemento: document.getElementById("complemento")?.value || "",
+      bairro: document.getElementById("bairro")?.value || "",
+      cidade: document.getElementById("cidade")?.value || "",
+      uf: document.getElementById("uf")?.value || "",
+      cep: document.getElementById("cep")?.value || "",
+      referencia: document.getElementById("referencia")?.value || "",
+      tipoJuridico: document.getElementById("tipoJuridico")?.value || "",
+      porteEmpresa: document.getElementById("porteEmpresa")?.value || "",
+      objetivoSocial: document.getElementById("objetivoSocial")?.value || "",
+      regimeTributario: document.getElementById("regimeTributario")?.value || "",
+      capitalSocial: document.getElementById("capitalSocial")?.value || "",
       socio1: document.querySelector('input[name="socio1"]:checked')?.value || "",
       socio2: document.querySelector('input[name="socio2"]:checked')?.value || "",
       socio3: document.querySelector('input[name="socio3"]:checked')?.value || "",
@@ -128,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
-  // ---------- enviar via fetch normal ----------
+  // ---------- enviar via fetch normal (evita preflight) ----------
   async function enviarFetchNormal(data) {
     const resp = await fetch(APPS_SCRIPT_URL, {
       method: "POST",
@@ -167,7 +155,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (!data.privacyAccepted) {
-      document.getElementById("privacy-error").style.display = "block";
+      const perr = document.getElementById("privacy-error");
+      if (perr) perr.style.display = "block";
       return { ok: false };
     }
 
@@ -175,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     try {
       const resp = await enviarFetchNormal(data);
-      if (resp.ok && resp.json.status === "ok") return { ok: true };
+      if (resp.ok && resp.json && resp.json.status === "ok") return { ok: true };
       throw new Error("fallback");
     } catch {
       return await enviarNoCors(data);
@@ -215,5 +204,12 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("Falha ao enviar. Tente novamente.");
     }
   });
+
+  // ---------- fallback: remove backdrops "presas" se houver ----------
+  setTimeout(() => {
+    document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+    document.body.classList.remove('modal-open');
+    document.body.style.paddingRight = '';
+  }, 300);
 
 }); // fim DOMContentLoaded
